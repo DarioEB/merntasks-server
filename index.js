@@ -8,13 +8,17 @@ const app = express();
 connection();
 
 // Habilitar cors
-app.use(cors());
+//habilitar cors
+app.use(cors({ credentials: true, origin: true }));
+app.options("*", cors());
 
 // Habilitar express.json
 app.use(express.json({ extended: true }));
 
 // Puerto de la app
-const port = process.env.port || 4000;
+//PUERTO DE LA APP
+const port = process.env.PORT || 4000;
+ 
 
 // Importar rutas
 app.use('/api/users', require('./routes/users') );
@@ -25,6 +29,6 @@ app.use('/api/projects', require('./routes/projects') );
 app.use('/api/tasks', require('./routes/tasks'))
 
 // Arrancar la app
-app.listen(port, '0.0.0.0', () => {
-    console.log(`El servidor está funcionando en el puerto ${port}`)
-})
+app.listen(port, () => {
+    console.log(`serv. corriendo en el puerto ${port} `);
+  });
